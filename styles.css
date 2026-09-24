@@ -1,0 +1,712 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ==========================================================================
+     1. PALETA DE COLORES IDENTITARIOS (Restaurante Maguila - Callao)
+     ========================================================================== */
+  
+  /* Colores Principales (Extraídos e inspirados en el Logo) */
+  --color-primary: #5a748f;          /* Azul Marino Típico del Logo Maguila */
+  --color-primary-light: #7890abb5;    /* Azul Marino Suave / Modales o Fondos Secundarios */
+  --color-accent: #d97706;           /* Amarillo Cítrico / Dorado Marino (Limo / Chicha) */
+  --color-accent-hover: #b45309;     /* Tono Hover Warm para botones */
+  
+  /* Neutrales & Fondos de la Página */
+  --color-bg: #f4f7fb;               /* Fondo General Claro y Fresco */
+  --color-surface: #eef3fa;          /* Fondo Secundario Extraído del Logo Maguila */
+  --color-surface-card: #ffffff;     /* Tarjetas de Productos en Blanco Limpio */
+  --color-border: rgba(90, 116, 143, 0.2); /* Borde sutil basado en el azul principal */
+  --color-white: #ffffff;
+
+  /* Textos y Lectura */
+  --color-text: #1e293b;             /* Texto Base de Contenido Oscuro */
+  --color-text-main: #2c3e50;        /* Títulos e Identidad */
+  --color-text-muted: #64748b;       /* Textos Secundarios / Leyendas */
+
+  /* ==========================================================================
+     2. COLORES POR CATEGORÍA DE LA CARTA (Identificadores Gastronómicos)
+     ========================================================================== */
+  --category-product-main-dishes: #d97706;          /* Cebiches & Platos Marinos (Cítrico) */
+  --category-product--desserts: #d946ef;             /* Postres Caseros (Dulce) */
+  --category-product--drinks-and-cocktails: #06b6d4; /* Coctelería & Cervezas (Refrescante) */
+  --category-product---snacks: #10b981;              /* Chicharrones & Entradas (Crocante) */
+
+  /* ==========================================================================
+     3. REDES SOCIALES Y PLATAFORMAS
+     ========================================================================== */
+  --whatsapp-platform: #25D366;
+  --whatsapp-hover: #1EBE5D;
+  --facebook-platform: #1877F2;
+  --instagram-platform: #E4405F;
+
+  /* ==========================================================================
+     4. TIPOGRAFÍAS
+     ========================================================================== */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-main: var(--font-body);
+
+  /* --- Tamaños de Fuente Fluidos con clamp() --- */
+  --font-size-h1: clamp(1.8rem, 4vw, 3rem);
+  --font-size-h2: clamp(1.6rem, 3.5vw, 2.6rem);
+  --font-size-h3: clamp(1.25rem, 2.2vw, 1.8rem);
+  --font-size-h4: clamp(1.10rem, 2vw, 1.5rem);
+  --font-size-title-html: clamp(1.3rem, 2.5vw, 2rem);
+  --font-size-body: clamp(0.95rem, 1vw + 0.4rem, 1.1rem);
+  --font-size-sm: clamp(0.8rem, 0.8vw + 0.4rem, 0.9rem);
+
+  /* ==========================================================================
+     5. REDONDEO DE BORDES
+     ========================================================================== */
+  --border-radius-sm: 0.5rem;    /* 8px */
+  --border-radius-md: 0.9rem;    /* 14.4px */
+  --border-radius-lg: 1.5rem;    /* 24px */
+  --border-radius-full: 9999px;  /* Píldoras / Botones redondeados */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* ==========================================================================
+     6. SOMBRAS DE ELEVACIÓN Y EFECTOS
+     ========================================================================== */
+  --shadow-sm: 0 2px 8px rgba(90, 116, 143, 0.12);
+  --shadow-md: 0 8px 24px rgba(90, 116, 143, 0.18);
+  --shadow-lg: 0 16px 36px rgba(90, 116, 143, 0.25);
+  --shadow-glow-wsp: 0 4px 20px rgba(37, 211, 102, 0.35);
+
+  /* ==========================================================================
+     7. CONFIGURACIONES RESPONSIVE & LAYOUT
+     ========================================================================== */
+  --max-width: 1200px;
+  --gutter: clamp(1rem, 3vw, 2rem);
+
+  /* ==========================================================================
+     8. TRANSICIONES
+     ========================================================================== */
+  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header__nav-link, .header__nav-link::after {
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Manejo Accesible de Enfoque por Teclado */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.container {
+  width: min(100% - (var(--gutter) * 2), var(--max-width));
+  margin-inline: auto;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.85rem 1.8rem;
+  font-weight: bold;
+  font-size: var(--font-body);
+  transition: var(--transition-normal);
+}
+
+.header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0.5rem 1.5rem;
+}
+
+.header__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.5rem;
+    gap: clamp(1rem, 2vw, 2.5rem);
+}
+
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 2rem);
+    flex-wrap: wrap;
+}
+
+.header__logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(45px, 6vw, 60px);
+    height: clamp(45px, 6vw, 60px);
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.header__img {
+    border-radius: var(--border-radius-full);
+}
+
+.header__logo-link:hover {
+    transform: scale(1.1);
+}
+
+.header__information {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    font-size: var(--font-size-title-html);
+    line-height: 1.1;
+    color: var(--color-text-main);
+}
+
+.header__ubication {
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.header__nav-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(1rem, 2vw, 2rem);
+}
+
+.header__nav-link {
+    display: inline-block;
+
+    position: relative;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    transition: var(--transition-fast);
+    padding-block: 0.3rem;
+}
+
+.header__nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: var(--border-radius-full);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.header__nav-link:hover, .header__nav-link:focus-visible {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.header__nav-link:hover::after, .header__nav-link:focus-visible::after {
+    transform: scaleX(1);
+}
+
+
+
+.header__nav-link--facebook {
+    color: var(--facebook-platform);
+}
+
+.header__nav-link--facebook:hover {
+    color: var(--facebook-platform);
+}
+
+
+.header__nav-link--facebook::after {
+    background: var(--facebook-platform);
+}
+
+.header__nav-link--instagram {
+    color: var(--instagram-platform);
+}
+
+.header__nav-link--instagram:hover {
+    color: var(--instagram-platform);
+}
+
+.header__nav-link--instagram::after {
+    background: var(--instagram-platform);
+}
+
+.header__nav-link--whatsapp {
+    color: var(--whatsapp-platform);
+}
+
+.header__nav-link--whatsapp:hover {
+    color: var(--whatsapp-platform)
+}
+
+.header__nav-link--whatsapp::after {
+    background: var(--whatsapp-platform);
+}
+
+.hero {
+    margin-block: clamp(2rem, 5vw, 5rem);
+}
+
+.hero__container {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: clamp(1.5rem, 2.5vw, 3rem);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 1.5vw, 2rem);
+}
+
+.hero__badge {
+    align-self: center;
+    background: var();
+    color: var();
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    padding: 0.4rem 1.2rem;
+}
+
+.hero__title {
+    line-height: 1.2;
+}
+
+.hero__subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.button--hero {
+    border-radius: var(--border-radius-md);
+}
+
+.button--hero-view-products {
+    background: transparent;
+    color: var(--color-primary);    
+    border: 1px solid var(--color-border);
+}
+
+.button--hero-view-products:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: var();
+}
+
+.button--hero-order-by-whatsapp {
+    background: var(--whatsapp-platform);
+    color: var(--color-white);
+
+}
+
+.button--hero-order-by-whatsapp:hover {
+    background: var(--whatsapp-hover);
+    box-shadow: var(--shadow-glow-wsp);
+    transform: translateY(-2px);
+}
+
+.hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(1rem, 2.5vw, 2.3rem);
+    padding-top: 1.5rem;
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+}
+
+.stats-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-characteristics {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+}
+
+.stats__characteristics--star {
+    color: var(--color-star);
+}
+
+.stats__characteristics--percentage {
+    color: var(--color-accent);
+}
+
+
+.stats__characteristics--located {
+    color: var(--color-chucuito);
+
+}
+
+.stats__information {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.about {
+    padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.about__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: clamp(1.5rem, 3vw, 3rem);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.about__information {
+    flex:  1 1 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.about__badge {
+    align-self: flex-start;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+.about__title {
+    font-size: clamp(1.5rem, 2.4vw, 3rem);
+}
+
+.about__description {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+}
+
+
+.about__action {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+}
+
+.about__img {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    max-height: 350px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+}
+
+.button--about {
+    width: 100%;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    margin-top: auto;
+}
+
+.button--about-whatsapp {
+    background: var(--whatsapp-platform);
+    color: var(--color-white);
+}
+
+.button--about-whatsapp:hover {
+    background: var(--whatsapp-hover);
+    box-shadow: var(--shadow-glow-wsp);
+    transform: translateY(-3px);
+}
+
+.products {
+    padding-block: clamp(2.5rem, 5vw, 5rem);
+}
+
+.products__container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 2.5vw, 3rem);
+}
+
+.products__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.products__badge {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-full);
+    font-weight: bold;
+    padding: 0.4rem 1.2rem;
+}
+
+.grid__products {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.category__products__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.category__title {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid currentColor;
+    text-align: center;
+}
+
+.category__products__container--main-dishes .category__title {
+  color: var(--category-product-main-dishes);
+}
+
+.category__products__container--desserts-and-drinks .category__title {
+  color: var(--category-product--desserts);
+}
+
+.category__products__container--cocktails-and-beers .category__title {
+  color: var(--category-product--drinks-and-cocktails);
+}
+
+.category__products__container--starters-and-crispies .category__title {
+  color: var(--category-product---snacks);
+}
+
+.category-products__grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+   gap: 1.5rem;
+}
+
+
+.product__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    gap: 1rem;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.product__card:hover {
+    transform: translateY(-4px);   
+    border-color: var(--color-primary);
+}
+
+.product__badge {
+    align-self: flex-start;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border);
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+.product__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.product__title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    min-height: 2.6rem;
+    color: var(--color-text-main);
+}
+
+.product-card__img {
+    width: 100%;
+    height: 180px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+}
+
+.product__description {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    flex-grow: 1;
+}
+
+.product__price {
+    align-self: flex-start;
+    font-weight: bold;
+    color: var(--color-accent);
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.link--product {
+    background: transparent;
+    color: var(--color-primary);
+    font-weight: bold;
+    border: 2px solid var(--color-primary);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    border-radius: var(--border-radius-md);
+    transition: var(--transition);
+    margin-top: auto;
+}
+
+.link--product--whatsapp:hover {
+    background: var(--whatsapp-hover);
+    color: var(--color-white);
+    border: 2px solid var(--whatsapp-hover);
+    box-shadow: var(--shadow-glow-wsp);    
+}   
+
+
+.footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: clamp(1.5rem, 2vw, 2.5rem);
+    margin-top: 3rem;
+}
+
+.footer__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 2vw, 2rem);
+}
+
+.footer__title {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+}
+
+.footer__text {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.footer__text--copyright {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
